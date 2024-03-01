@@ -1,0 +1,39 @@
+<!-- @ts-nocheck -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/visualization.css">
+    <title>Playlist Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <div id="nav-back-arrow">
+            <img id="back-arrow" src="../static/images/Back_Arrow.svg" alt="back-arrow">
+            <h3 id="back-text">Back to Playlists</h3>
+        </div>
+        <h1 id="website-h1">v&f</h1>
+    </header>
+    <div id="main-block">
+        <div id="plot"></div>
+    </div>
+     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const plotData = {{ plot_json|safe }};
+            Plotly.newPlot('plot', plotData, {}, { displayModeBar: false, responsive: true });
+
+        });
+    </script>
+    <script>
+        document.getElementById('nav-back-arrow').addEventListener('click', function() {
+            window.location.href = '/landing';
+        });
+    </script>
+    
+    
+</body>
+</html>

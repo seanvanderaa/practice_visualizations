@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/landing.css">
+</head>
+<body>
+    <header><h1 id="website-h1">visualizations&filters</h1></header>
+    <div id="user-prof-pic"><img src="{{ profile_image }}" alt=""></div>
+    <div id="welcome-text">
+        <h1>Welcome, {{ name }}</h1>
+        <h3>Let's visualize some music, eh?</h3>
+        <p>{{ top_genres }} </p>
+    </div>
+    <div id="main-block">
+        <a class="main-block-widget" id="playlists" href="/get_user_playlists"><h3>Visualize</h3></a>
+        <a class="main-block-widget" id="filters" href="/explore"><h3>Explore</h3></a>
+        <a class="main-block-widget" id="profile" href="/get_user_playlists"><h3>Profile</h3></a>
+    </div>
+</body>
+</html>

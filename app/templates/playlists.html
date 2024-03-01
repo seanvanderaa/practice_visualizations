@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Playlists</title>
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/playlists.css">
+    <!-- Your CSS and other head elements -->
+</head>
+<body>
+    <header>
+        <div id="nav-back-arrow">
+            <img id="back-arrow" src="../static/images/Back_Arrow.svg" alt="back-arrow">
+            <h3 id="back-text">Back to Playlists</h3>
+        </div>
+        <h1 id="website-h1">visualizations&filters</h1></header>
+    <div id="main-block">
+        <h1 id="user-h1">Choose a Playlist</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Playlist Title</th>
+                    <th>Total Tracks</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for playlist in playlists %}
+                    <tr>
+                        <td><img src="{{ playlist.image_url }}" alt="Playlist Image" width="100" height="100"></td>
+                        <td>{{ playlist.name }}</td>
+                        <td>{{ playlist.total_tracks | int }}</td>
+                        <td><button class="visualize-button" data-uri="{{ playlist.uri }}">Visualize Playlist</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="loadingDiv" style="display:none;">
+        <div id="loading-block">
+            <h3 id="loading-text">Visualizing Your Playlist...</h3>
+            <div class="loader"></div>
+        </div>
+    </div>    
+</body>
+<script>
+    document.querySelectorAll('.visualize-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const playlistUri = this.getAttribute('data-uri');
+            showLoading()
+            window.location.href = `/visualize_playlist/${encodeURIComponent(playlistUri)}`;
+        });
+    });
+    function showLoading() {
+        document.getElementById("loadingDiv").style.display = "flex";
+    }
+
+    function hideLoading() {
+        document.getElementById("loadingDiv").style.display = "none";
+    }
+
+
+</script>
+
+
+</html>

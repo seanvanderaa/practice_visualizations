@@ -1,0 +1,21 @@
+Next tasks:
+- Figure out auth issues and get it connected to authlib
+- add website attributes: nav, back buttons n such
+- Save photo functionality that saves something cool
+- Some sort of playlist-making functionality or other cool interactiveness from the plot
+- filter system (take a playlist or maybe start with the db), allow you to change aspects 
+and have it produce those songs in a list with an option to visualize
+- Ability to view all your songs and then produce clusters based on values (display clusters)
+- Confidence rating for recommended songs? If below a threshold, don't recommend 
+    - Similarly, increase or lower threshold for song recommendations based on the defined clusters and trends (and number of songs, ability to detect variance)
+    - Change axes depending on the three most valuable attributes
+- Add song to playlist action
+- Add all liked songs to the .db (slow load)
+- Would it be possible to attach songs added to a particular person/people and their profile such that recommended songs only come from
+people who have a similar profile to you? That way there isn't contamination from non-similar profiles and each song recommended to you
+may come from someone you would want to interact with
+- Pulsing background color?
+
+Connectivity Portion
+- Create 2D plot of users
+- 

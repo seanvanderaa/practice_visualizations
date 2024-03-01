@@ -1,0 +1,98 @@
+<!-- @ts-nocheck -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/main.css">
+    <link rel="stylesheet" type="text/css" href="../static/visualization.css">
+    <title>Playlist Visualization</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <header>
+        <div id="nav-back-arrow">
+            <img id="back-arrow" src="../static/images/Back_Arrow.svg" alt="back-arrow">
+            <h3 id="back-text">Back to Playlists</h3>
+        </div>
+        <h1 id="website-h1">v&f</h1>
+    </header>
+    <div id="main-block">
+        <div id="plot"></div>
+    </div>
+    <div id="info-box">
+        <img id="album-cover" src="" alt="Album Cover">
+        <div id="text-container">
+            <h2 id="song-name">Song Name</h2>
+            <h3 id="artist-name">Artist Name</h3>
+        </div>
+        <div id="play-button-container"><a id="play-button-link" href="#"><img id="play-button" src="../static/images/Play.png" alt="Album Cover"></a></div>
+    </div>
+     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const plotData = {{ plot_json|safe }};
+            Plotly.newPlot('plot', plotData, {}, { displayModeBar: false, responsive: true });
+    
+            const myPlot = document.getElementById('plot');
+    
+            myPlot.on('plotly_hover', function(data){
+                const hoveredPoint = data.points[0];
+
+                // Check if customdata is defined for the hovered point
+                if (hoveredPoint.customdata) {
+                    // Extract information from the hovered point's customdata
+                    const albumCoverUrl = hoveredPoint.customdata[0]; // Album cover URL
+                    const songName = hoveredPoint.customdata[1]; // Song name
+                    const artistName = hoveredPoint.customdata[2]; // Artist name
+                    const song_URI = hoveredPoint.customdata[6];
+
+                    // Update the info box
+                    document.getElementById('album-cover').src = albumCoverUrl;
+                    document.getElementById('song-name').textContent = songName;
+                    document.getElementById('artist-name').textContent = artistName;
+                    document.getElementById('info-box').style.opacity = 1;
+                    document.getElementById('info-box').style.display = 'grid';
+                    document.getElementById('play-button-link').href = song_URI;
+                }
+            });
+    
+            // Optionally hide the info box when not hovering over a point
+/*             let isHoveringOverInfoBox = false;
+
+            let infoBox = document.getElementById('info-box');
+            let hideInfoBoxTimeout; // To store the timeout for hiding the info-box
+
+            // Function to manage the visibility of the info-box
+             function updateInfoBoxVisibility(show) {
+                clearTimeout(hideInfoBoxTimeout); // Clear any existing timeout
+
+                if (show) {
+                    infoBox.style.display = 'grid';
+                    setTimeout(() => infoBox.style.opacity = '1', 0); // Fade in
+                } else {
+                    infoBox.style.opacity = '0'; // Fade out
+                    hideInfoBoxTimeout = setTimeout(() => {
+                        if (infoBox.style.opacity === '0') {
+                            infoBox.style.display = 'none';
+                        }
+                    }, 500); // Wait for fade-out before hiding
+                }
+            }
+
+            document.getElementById('info-box').addEventListener('mouseenter', () => updateInfoBoxVisibility(true));
+            document.getElementById('info-box').addEventListener('mouseleave', () => updateInfoBoxVisibility(false));
+
+            myPlot.on('plotly_unhover', () => setTimeout(() => updateInfoBoxVisibility(false), 3000)); */
+
+        });
+    </script>
+    <script>
+        document.getElementById('nav-back-arrow').addEventListener('click', function() {
+            window.location.href = '/get_user_playlists';
+        });
+    </script>
+    
+    
+</body>
+</html>
